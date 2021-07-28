@@ -1,0 +1,59 @@
+
+# using math:
+def fact(n):
+    if n == 0:
+        return 1
+    else:
+        return n*fact(n-1)
+
+def grid(m,n):
+    if m >= 1 and n >= 1:
+        a = fact((m - 1) + (n - 1))
+        b = fact((m - 1))
+        c = fact((n - 1))
+        r = a / (b * c)
+        return int(r)
+    else:
+        return 0
+
+
+
+
+# using the computer:
+def f(m,n):
+    if m == 1 or n == 1:
+        return 1
+    else:
+        return f(n-1,m) + f(n,m-1)
+
+
+def mf(m,n,memo={}):
+    global rr
+    # f(a,b) = f(b,a)
+    if n > m:
+        n,m = m,n
+    k = str(m)+str(n)
+    if k in memo:
+        return memo[k]
+    if n == 1 or m == 1:
+        return 1
+    if n < 1 or m < 1:
+        return 0
+    if m == n:
+        memo[k] = 2*mf(n-1,m)
+        return memo[k]
+    memo[k] = mf(n-1,m) + mf(n,m-1)
+    rr = memo
+    return memo[k]
+
+
+
+print('200 iq way:',grid(20,15))
+
+
+print('bonobo(bonobo com qi 200) way:',mf(20,15))
+
+
+
+
+    
